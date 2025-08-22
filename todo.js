@@ -12,7 +12,6 @@ addBtn.addEventListener("click", () => {
     if (!todoText) return;
 
     addTodoToList(todoText)
-
     let todos = JSON.parse(localStorage.getItem("todos")) || [];
     todos.push(todoText);
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -25,9 +24,6 @@ addBtn.addEventListener("click", () => {
         const li = document.createElement("li");
         li.textContent = todoText;
 
-    li.addEventListener("click", () => {
-        li.style.textDecoration = li.style.textDecoration === "line-through" ? "none" : "line-through";
-    });
 
     const delBtn = document.createElement("button");
     delBtn.textContent = "削除";
@@ -36,7 +32,19 @@ addBtn.addEventListener("click", () => {
         li.remove();
         removeTodoFromStorage(todoText);
     });
+
+    const space = document.createTextNode(" ");
+
+    const finBtn = document.createElement("button");
+    finBtn.textContent = "完了";
+    finBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        li.classList.add("finish");
+    });
     li.appendChild(delBtn);
+    li.appendChild(space);
+    li.appendChild(finBtn);
+    
 
 todoList.appendChild(li);
     }
@@ -48,4 +56,9 @@ function removeTodoFromStorage(todoText) {
     todos = todos.filter(t => t !== todoText);
 
     localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function finishanimation() {
+
+
 }
