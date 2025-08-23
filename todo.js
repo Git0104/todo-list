@@ -40,6 +40,11 @@ addBtn.addEventListener("click", () => {
     finBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         li.classList.add("finish");
+
+        li.addEventListener("animationend", () => {
+            li.remove()
+            removeTodoFromStorage(todoText);
+        });
     });
     li.appendChild(delBtn);
     li.appendChild(space);
@@ -62,3 +67,4 @@ function finishanimation() {
 
 
 }
+
